@@ -20,7 +20,6 @@ class Random_Forest:
         self.data, self.target_data = X_tr, y_tr
         self.columns = self.data.columns
         self.max_features = int(sqrt(len(self.data.columns)))
-        # input()
 
         self.id_estimators = self.process_estimator()
         print(self.id_estimators)
