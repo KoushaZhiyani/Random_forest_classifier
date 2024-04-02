@@ -14,3 +14,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_
 model = Random_Forest()
 model.fit_model(X_train, y_train)
 model.make_predict(X_test)
+print(y_pre)
+accuracy = model.score(y_pre, y_test)
+print("Accuracy:", accuracy)
