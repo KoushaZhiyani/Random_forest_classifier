@@ -1,15 +1,11 @@
 import pandas as pd
-import random
 import warnings
-from sklearn.model_selection import train_test_split
-from math import sqrt
-import ctypes
 
 warnings.filterwarnings("ignore")
 
 
 class Decision_Tree:
-    def __init__(self, min_sample=1, max_depht=10, depth=0):
+    def __init__(self, min_sample=None, max_depht=None, depth=0):
         self.data = None  # data
         self.target_data = None  # target feature
 
@@ -27,9 +23,12 @@ class Decision_Tree:
         self.max_depht = max_depht  # maximum tree depth
         self.min_sample = min_sample  # minimum sample in Node
 
+        self.DT_id = self
     # process feature to find minimum gini
-    def fit_model(self, X_tr, y_tr):
 
+    def fit_model(self, X_tr, y_tr):
+        # print(self.DT_id)
+        # input()
         self.data = X_tr
         self.target_data = y_tr
         self.columns = self.data.columns
@@ -75,7 +74,6 @@ class Decision_Tree:
                     first.append(self.target_data.loc[j.name][0])
                 else:
                     second.append(self.target_data.loc[j.name][0])
-
             if len(second) > int(self.min_sample) and len(first) > int(self.min_sample):
                 self.gini_score(first, second, i, col)
 
@@ -158,23 +156,3 @@ class Decision_Tree:
             predict = list(filter(lambda key: label_each_col[key] == max(label_each_col.values()), label_each_col))[0]
             predict_list.append(predict)
         return predict_list
-
-    def score(self, y_pre, y_true):
-        # Zip the predicted and true labels together
-        zipped_data = zip(y_pre, y_true[self.target_data.columns[0]].values)
-        correct_predict, wrong_predict = 0, 0
-        # Iterate through the zipped data
-        for i in zipped_data:
-            # Check if the predicted and true labels match
-            if int(i[0]) == int(i[1]):
-                correct_predict += 1
-            else:
-                wrong_predict += 1
-        # Calculate and return the score
-        score = correct_predict / (correct_predict + wrong_predict)
-        return score
-
-
-
-
-
