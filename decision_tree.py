@@ -27,8 +27,7 @@ class Decision_Tree:
     # process feature to find minimum gini
 
     def fit_model(self, X_tr, y_tr):
-        # print(self.DT_id)
-        # input()
+        
         self.data = X_tr
         self.target_data = y_tr
         self.columns = self.data.columns
